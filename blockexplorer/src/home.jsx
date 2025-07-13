@@ -17,12 +17,12 @@ export default function Home() {
     }, [])
 
     return(
-        <div>
-            <h1 className="text-4xl text-blue-900 font-bold text-center">Ethereum Block Explorer</h1>
+        <div className="text-white font-mono">
+            <h1 className="text-4xl font-bold text-center">Ethereum Block Explorer</h1>
             <BlockNumber blockNumber={blockNumber}/>
 
             <h1>Block #{blockNumber} Information</h1>
-            
+            <BlockInfo blockNumber={blockNumber}/>
         </div>
     )
 }
