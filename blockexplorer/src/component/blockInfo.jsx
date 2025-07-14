@@ -1,21 +1,29 @@
 import { useEffect, useState } from "react";
-import alchemy from "../lib/alchemy";
 import ShortHash from "../lib/shortenHash";
 import block from "../assets/block.png";
+import getBlockInfo from "../lib/getBlockInfo";
 
 export default function BlockInfo({ blockNumber }) {
   const [blockInfo, setBlockInfo] = useState(null);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     async function fetchBlock() {
-      if (blockNumber) {
-        const block = await alchemy.core.getBlock(blockNumber);
-        setBlockInfo(block);
-      }
+      const {block, error} = await getBlockInfo(blockNumber);
+      setBlockInfo(block)
+      setError(error)
     }
 
     fetchBlock();
   }, [blockNumber]);
+
+  if (error) {
+    return <p className="text-center text-red-400 text-xl mt-6">{error}</p>;
+  }
+
+  if (!blockInfo) {
+    return <p className="text-center text-white">Loading block info...</p>;
+  }
 
   return (
     <div className="mt-5">

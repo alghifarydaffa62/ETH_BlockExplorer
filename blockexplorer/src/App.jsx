@@ -7,7 +7,7 @@ function App() {
     return(
       <Routes>
         <Route path='/' element={<Home/>}/>
-        <Route path='/block/:id' element={<BlockDetail />}/>
+        <Route path='/block/:number' element={<BlockDetail />}/>
       </Routes>
     )
 }
