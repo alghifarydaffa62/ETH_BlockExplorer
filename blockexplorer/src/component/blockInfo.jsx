@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 import ShortHash from "../lib/shortenHash";
 import block from "../assets/block.png";
+import hash from "../assets/hashtag.png";
+import miner from "../assets/user.png";
+import time from "../assets/clock.png";
+import transaction from "../assets/transaction.png";
 import getBlockInfo from "../lib/getBlockInfo";
 
 export default function BlockInfo({ blockNumber }) {
@@ -26,35 +30,72 @@ export default function BlockInfo({ blockNumber }) {
   }
 
   return (
-    <div className="mt-5">
+    <div>
       {blockInfo ? (
-        <div className="bg-[#0b1c3b] p-6 rounded-xl shadow-md shadow-white/10 text-white">
-            <div className="flex items-center gap-3 mb-6">
-              <img src={block} alt="Block icon" className="w-8 h-8 object-contain" />
-              <h1 className="text-3xl font-semibold text-white">Block <span className="text-blue-300">#{blockNumber}</span>:</h1>
+        <div className="flex flex-col gap-6 bg-[#0b1c3b] p-6 rounded-lg shadow-md shadow-white/10 text-white">
+          
+          {/* Header */}
+          <div className="flex items-center gap-3">
+            <img src={block} alt="Block icon" className="w-10 h-10 p-2 bg-blue-950 rounded-md object-contain" />
+            <h1 className="text-xl font-semibold text-white">
+              Block <span className="text-blue-300">#{blockNumber}</span>:
+            </h1>
+          </div>
+
+          {/* Block Hash */}
+          <div className="bg-[#12263e] p-4 rounded-lg">
+            <div className="flex items-center gap-2 mb-2">
+              <img src={hash} alt="Block icon" className="w-4 h-4 rounded-md object-contain" />
+              <p className="text-blue-200 font-bold text-md">
+                Block hash:
+              </p>
+            </div>
+  
+            <p className="font-semibold bg-[#1a3559] p-2 rounded-lg text-sm text-gray-300">{ShortHash(blockInfo.hash)}</p>
+          </div>
+
+          {/* Parent Hash */}
+          <div className="bg-[#12263e] p-4 rounded-lg">
+            <div className="flex items-center gap-2 mb-2">
+              <img src={hash} alt="" className="object-contain w-4 h-4"/>
+              <p className="text-blue-200 font-bold text-md">Parent Hash:</p>
             </div>
             
-            <p className="mb-2 text-md">
-              <span className="font-bold text-md text-blue-200">Block Hash:</span><br/>{ShortHash(blockInfo.hash)}
+            <p className="font-semibold bg-[#1a3559] p-2 rounded-lg text-sm text-gray-300">{ShortHash(blockInfo.parentHash)}</p>
+          </div>
+
+          {/* Miner */}
+          <div className="bg-[#12263e] p-4 rounded-lg">
+            <div className="flex items-center gap-2 mb-2">
+              <img src={miner} alt="" className="object-contain w-4 h-4"/>
+              <p className="text-blue-200 font-bold text-md">Miner:</p>
+            </div>
+            <p className="font-semibold bg-[#1a3559] p-2 rounded-lg text-sm text-gray-300">{blockInfo.miner}</p>
+          </div>
+
+          {/* Timestamp */}
+          <div className="bg-[#12263e] p-4 rounded-lg">
+            <div className="flex items-center gap-2 mb-2">
+              <img src={time} alt="" className="object-contain w-4 h-4"/>
+              <p className="text-blue-200 font-bold text-md">Timestamp:</p>
+            </div>
+
+            <p className="font-semibold bg-[#1a3559] p-2 rounded-lg text-sm text-md text-gray-300">
+              {new Date(blockInfo.timestamp * 1000).toLocaleString()}
             </p>
-            <p className="mb-2 text-md">
-              <span className="font-bold text-md text-blue-200">Parent Hash:</span> {ShortHash(blockInfo.parentHash)}
+          </div>
+
+          {/* Total Transactions */}
+          <div className="bg-[#12263e] p-4 rounded-lg">
+            <div className="flex items-center gap-2 mb-2">
+              <img src={transaction} alt="" className="object-contain w-5 h-5"/>
+              <p className="text-blue-200 font-bold text-md">Total transaction:</p>
+            </div>
+            <p className="font-semibold bg-[#1a3559] p-2 rounded-lg text-sm text-gray-300">
+              {blockInfo.transactions.length}
             </p>
-            <p className="mb-2 text-md">
-              <span className="font-bold text-md text-blue-200">Timestamp:</span> {new Date(blockInfo.timestamp * 1000).toLocaleString()}
-            </p>
-            <p className="mb-2 text-md">
-              <span className="font-bold text-md text-blue-200">Total transaction:</span> {blockInfo.transactions.length}
-            </p>
-            <p className="mb-2 text-md">
-              <span className="font-bold text-md text-blue-200">Gas Limit:</span> {blockInfo.gasLimit.toString()}
-            </p>
-            <p className="mb-2 text-md">
-              <span className="font-bold text-md text-blue-200">Gas used:</span> {blockInfo.gasUsed.toString()}
-            </p>
-            <p className="mb-2 text-md">
-              <span className="font-bold text-md text-blue-200">Miner:</span> {blockInfo.miner}
-            </p>
+          </div>
+
         </div>
       ) : (
         <p className="text-center text-white">Loading block info...</p>

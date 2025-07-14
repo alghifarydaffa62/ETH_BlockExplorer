@@ -5,13 +5,13 @@ export default function GetNumber() {
     const [blockNumber, setBlockNumber] = useState()
 
     useEffect(() => {
-        async function getBlockNumber() {
-        let latestBlock = await alchemy.core.getBlockNumber()
-        setBlockNumber(latestBlock);
-        }
-
-        getBlockNumber()
-    }, [])
+        const interval = setInterval(async () => {
+            let latestBlock = await alchemy.core.getBlockNumber()
+            setBlockNumber(latestBlock);
+        }, 5000)
+        
+        return () => clearInterval(interval)
+    }, [blockNumber])
 
     return(blockNumber)
 }
