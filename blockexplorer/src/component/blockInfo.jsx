@@ -26,7 +26,7 @@ export default function BlockInfo({ blockNumber }) {
         <div className="bg-[#092039] p-6 rounded-xl shadow-md shadow-white/10 text-white w-full md:w-1/2">
           <div className="flex items-center gap-3 mb-6">
             <img src={block} alt="Block icon" className="w-8 h-8 object-contain" />
-            <h1 className="text-3xl font-semibold text-white">Block #{blockNumber}:</h1>
+            <h1 className="text-3xl font-semibold text-white">Block <span className="text-blue-300">#{blockNumber}</span>:</h1>
           </div>
           
           <p className="mb-2 text-lg">
