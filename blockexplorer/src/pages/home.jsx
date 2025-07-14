@@ -3,6 +3,7 @@ import BlockInfo from "../component/blockInfo"
 import ethereum from "../assets/coins.png"
 import SearchBlock from "../component/searchBlock"
 import GetNumber from "../lib/getNumber"
+import BlockList from "../component/blockList"
 
 export default function Home() {
     let blockNumber = GetNumber();
@@ -21,7 +22,8 @@ export default function Home() {
             </div>
             
             <BlockNumber blockNumber={blockNumber}/>
-            <BlockInfo blockNumber={blockNumber}/>
+            <BlockList/>
+            {/* <BlockInfo blockNumber={blockNumber}/> */}
         </div>
     )
 }
