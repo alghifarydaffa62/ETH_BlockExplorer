@@ -3,29 +3,43 @@ import alchemy from "../lib/alchemy";
 import ShortHash from "../lib/shortenHash";
 import blockIcon from "../assets/block.png"
 import BlockInfo from "./blockInfo";
+import {Link} from "react-router-dom"
 
 export default function BlockList() {
-        const [blocks, setBlocks] = useState([]);
-        const [latestBlockNumber, setLatestBlockNumber] = useState(null);
+    const [blocks, setBlocks] = useState(() => {
+        const savedBlocks = localStorage.getItem("recentBlocks");
+        return savedBlocks ? JSON.parse(savedBlocks) : [];
+    });
 
-        useEffect(() => {
-            const interval = setInterval(async () => {
-                const currentBlock = await alchemy.core.getBlockNumber();
+    const [latestBlockNumber, setLatestBlockNumber] = useState(() => {
+        const savedBlocks = localStorage.getItem("recentBlocks");
+        if (savedBlocks) {
+            const parsed = JSON.parse(savedBlocks);
+            return parsed.length > 0 ? parsed[0].number : null;
+        }
+        return null;
+    });
 
-                if (currentBlock !== latestBlockNumber) {
-                    const newBlock = await alchemy.core.getBlock(currentBlock);
+    useEffect(() => {
+        const interval = setInterval(async () => {
+        const currentBlock = await alchemy.core.getBlockNumber();
 
-                    setBlocks(prev => {
-                    const updated = [newBlock, ...prev];
-                    return updated.slice(0, 10); 
-                    });
+        if (currentBlock !== latestBlockNumber) {
+            const newBlock = await alchemy.core.getBlock(currentBlock);
 
-                    setLatestBlockNumber(currentBlock);
-                }
-            }, 5000); 
+            setBlocks(prev => {
+            const updated = [newBlock, ...prev].slice(0, 10);
 
-                return () => clearInterval(interval); 
-        }, [latestBlockNumber]);
+            localStorage.setItem("recentBlocks", JSON.stringify(updated));
+            return updated;
+            });
+
+            setLatestBlockNumber(currentBlock);
+        }
+        }, 2000);
+
+        return () => clearInterval(interval);
+    }, [latestBlockNumber]);
 
     return(
         <div className="flex justify-center gap-8 my-5">
@@ -37,7 +51,7 @@ export default function BlockList() {
                         <div className="flex gap-3">
                             <img src={blockIcon} alt="" className="w-9 h-9 object-contain p-2 bg-blue-950 rounded-md"/>
                             <div>
-                                <p className="text-md font-bold">Block <span className="text-blue-500">#{block.number}</span></p>
+                                <p className="text-md font-bold">Block <Link to={`/block/${block.number}`} className="text-blue-500">#{block.number}</Link></p>
                                 <p className="text-sm text-gray-400">Hash: {ShortHash(block.hash)}</p>
                             </div>
                         </div>
@@ -45,6 +59,7 @@ export default function BlockList() {
                     ))}
                 </ul>
             </div>
+
             <BlockInfo blockNumber={latestBlockNumber}/>
         </div>
         

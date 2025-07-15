@@ -1,6 +1,6 @@
 import alchemy from "./alchemy";
 
-export default async function getBlockInfo(searchInput) {
+export default async function BlockValdation(searchInput) {
     if (!searchInput) return null;
     
     try {

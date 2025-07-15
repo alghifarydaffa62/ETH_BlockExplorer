@@ -13,7 +13,7 @@ export default function SearchBlock() {
     return(
             <input 
                 type="text" 
-                placeholder="Enter block number or block hash"
+                placeholder="Search by Block Number"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={handleKeyPress}

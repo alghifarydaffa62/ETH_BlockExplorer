@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import { useState } from "react"
-import getBlockInfo from "../lib/getBlockInfo"
+import BlockValidation from "../lib/blockValidation"
 import { useParams } from "react-router-dom";
 import ShortHash from "../lib/shortenHash";
 
@@ -10,7 +10,7 @@ export default function BlockTransaction() {
 
     useEffect(() => {
         async function getinfo() {
-        const {block} = await getBlockInfo(number)
+        const {block} = await BlockValidation(number)
         setBlockInfo(block)
         }
 

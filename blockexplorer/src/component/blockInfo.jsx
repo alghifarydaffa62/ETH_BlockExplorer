@@ -1,15 +1,17 @@
 import { useEffect, useState } from "react";
+import {Link, useLocation} from "react-router-dom"
 import ShortHash from "../lib/shortenHash";
 import block from "../assets/block.png";
 import hash from "../assets/hashtag.png";
 import miner from "../assets/user.png";
 import time from "../assets/clock.png";
 import transaction from "../assets/transaction.png";
-import getBlockInfo from "../lib/getBlockInfo";
+import getBlockInfo from "../lib/blockValidation";
 
 export default function BlockInfo({ blockNumber }) {
   const [blockInfo, setBlockInfo] = useState(null);
   const [error, setError] = useState(null);
+  const location = useLocation();
 
   useEffect(() => {
     async function fetchBlock() {
@@ -19,7 +21,7 @@ export default function BlockInfo({ blockNumber }) {
     }
 
     fetchBlock();
-  }, [blockNumber]);
+  }, [location.pathname, blockNumber]);
 
   if (error) {
     return <p className="text-center text-red-400 text-xl mt-6">{error}</p>;
@@ -38,7 +40,7 @@ export default function BlockInfo({ blockNumber }) {
           <div className="flex items-center gap-3">
             <img src={block} alt="Block icon" className="w-10 h-10 p-2 bg-blue-950 rounded-md object-contain" />
             <h1 className="text-xl font-semibold text-white">
-              Block <span className="text-blue-300">#{blockNumber}</span>:
+              Block <Link to={`/block/${blockNumber}`} className="text-blue-300">#{blockNumber}</Link>:
             </h1>
           </div>
 
@@ -51,7 +53,7 @@ export default function BlockInfo({ blockNumber }) {
               </p>
             </div>
   
-            <p className="font-semibold bg-[#1a3559] p-2 rounded-lg text-sm text-gray-300">{ShortHash(blockInfo.hash)}</p>
+            <p className="font-semibold bg-[#1a3559] p-2 rounded-lg text-sm text-gray-300">{blockInfo.hash}</p>
           </div>
 
           {/* Parent Hash */}

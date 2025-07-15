@@ -8,7 +8,7 @@ export default function GetNumber() {
         const interval = setInterval(async () => {
             let latestBlock = await alchemy.core.getBlockNumber()
             setBlockNumber(latestBlock);
-        }, 5000)
+        }, 2000)
         
         return () => clearInterval(interval)
     }, [blockNumber])
