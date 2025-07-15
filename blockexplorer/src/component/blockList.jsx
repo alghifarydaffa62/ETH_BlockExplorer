@@ -28,7 +28,7 @@ export default function BlockList() {
         }, [latestBlockNumber]);
 
     return(
-        <div className="flex justify-center gap-8 mt-5">
+        <div className="flex justify-center gap-8 my-5">
             <div className="bg-[#0b1c3b] p-6 rounded-lg shadow-md shadow-white/10 text-white">
                 <h2 className="text-xl font-bold mb-5">Recent Blocks</h2>
                 <ul className="space-y-3">

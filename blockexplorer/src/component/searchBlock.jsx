@@ -11,14 +11,12 @@ export default function SearchBlock() {
         }
     }
     return(
-        <div className="flex justify-center mt-2">
             <input 
                 type="text" 
                 placeholder="Enter block number or block hash"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={handleKeyPress}
-                className="w-96 h-10 px-4 bg-[#17293e] border border-gray-600 text-white text-center placeholder-gray-400 rounded-md focus:outline-none"/>
-        </div>
+                className="w-96 h-10 px-4 bg-[#17293e] border border-gray-600 text-white placeholder-gray-400 rounded-md focus:outline-none"/>
     )
 }

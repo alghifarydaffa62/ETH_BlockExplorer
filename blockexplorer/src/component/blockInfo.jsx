@@ -32,7 +32,7 @@ export default function BlockInfo({ blockNumber }) {
   return (
     <div>
       {blockInfo ? (
-        <div className="flex flex-col gap-6 bg-[#0b1c3b] p-6 rounded-lg shadow-md shadow-white/10 text-white">
+        <div className="flex flex-col gap-6 bg-[#0b1c3b] p-6 rounded-lg shadow-md shadow-white/10 text-white h-[45rem] overflow-y-auto">
           
           {/* Header */}
           <div className="flex items-center gap-3">
@@ -101,6 +101,5 @@ export default function BlockInfo({ blockNumber }) {
         <p className="text-center text-white">Loading block info...</p>
       )}
     </div>
-
   );
 }
