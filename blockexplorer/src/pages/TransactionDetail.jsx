@@ -17,7 +17,7 @@ export default function TransactionDetail() {
                     <span className="text-blue-300"> {ShortHash(hash)}</span>
                 </h1>
             </div>
-            <BackButton/>
+            
             <TransactionBoxDetail hash={hash}/>
         </div>
     )
