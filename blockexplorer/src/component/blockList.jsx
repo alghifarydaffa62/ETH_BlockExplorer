@@ -51,7 +51,7 @@ export default function BlockList() {
                         <div className="flex gap-3">
                             <img src={blockIcon} alt="" className="w-9 h-9 object-contain p-2 bg-blue-950 rounded-md"/>
                             <div>
-                                <p className="text-md font-bold">Block <Link to={`/block/${block.number}`} className="text-blue-500">#{block.number}</Link></p>
+                                <p className="text-lg font-bold">Block <Link to={`/block/${block.number}`} className="text-blue-500">#{block.number}</Link></p>
                                 <p className="text-sm text-gray-400">Hash: {ShortHash(block.hash)}</p>
                             </div>
                         </div>

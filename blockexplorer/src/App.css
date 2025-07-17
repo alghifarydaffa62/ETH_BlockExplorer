@@ -2,6 +2,7 @@
 
 body {
     @apply bg-[#05142f];
+    @apply font-mono
 }
 
 /* global.css */

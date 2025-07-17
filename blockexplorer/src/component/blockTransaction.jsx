@@ -3,6 +3,7 @@ import { useState } from "react"
 import BlockValidation from "../lib/blockValidation"
 import { useParams } from "react-router-dom";
 import ShortHash from "../lib/shortenHash";
+import { Link } from "react-router-dom";
 
 export default function BlockTransaction() {
     const { number } = useParams();
@@ -34,10 +35,10 @@ export default function BlockTransaction() {
                         key={index}
                         className="bg-[#12263e] p-4 rounded-lg text-sm shadow shadow-black/10"
                     >
-                        <p className="text-blue-200 text-md font-bold mb-1">
+                        <p className="text-blue-200 text-lg font-bold mb-1">
                         Transaction {index + 1}
                         </p>
-                        <p className="text-gray-300 break-all">{ShortHash(txHash)}</p>
+                        <Link to={`/transaction/${txHash}`} className="text-gray-300 hover:text-blue-500">{ShortHash(txHash)}</Link>
                     </div>
                     ))}
                 </div>
