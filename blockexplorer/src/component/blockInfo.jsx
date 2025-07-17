@@ -6,7 +6,7 @@ import hash from "../assets/hashtag.png";
 import miner from "../assets/user.png";
 import time from "../assets/clock.png";
 import transaction from "../assets/transaction.png";
-import getBlockInfo from "../lib/blockValidation";
+import BlockValidation from "../lib/blockValidation";
 
 export default function BlockInfo({ blockNumber }) {
   const [blockInfo, setBlockInfo] = useState(null);
@@ -15,7 +15,7 @@ export default function BlockInfo({ blockNumber }) {
 
   useEffect(() => {
     async function fetchBlock() {
-      const {block, error} = await getBlockInfo(blockNumber);
+      const {block, error} = await BlockValidation(blockNumber);
       setBlockInfo(block)
       setError(error)
     }

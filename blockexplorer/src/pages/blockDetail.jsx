@@ -12,7 +12,7 @@ export default function BlockDetail() {
       <Header/>
 
       <div className="mt-6">
-        <h1 className="text-2xl md:text-4xl font-bold text-center mb-6">
+        <h1 className="text-2xl md:text-4xl font-bold text-center">
           Block <span className="text-blue-400">#{number}</span>
         </h1>
 
