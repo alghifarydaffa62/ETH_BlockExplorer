@@ -43,14 +43,14 @@ export default function TransactionBoxDetail({hash}) {
                                 <p className="text-gray-400 p-3 bg-[#1a3559] rounded-md mt-2">{ShortHash(transactionInfo.hash)}</p>
                             </div>
                             
-                            <div>
+                            <div className="flex flex-col gap-2">
                                 <h1 className="text-xl font-semibold">Transaction From: </h1>
-                                <p className="text-gray-400 p-3 bg-[#1a3559] rounded-md mt-2">{transactionInfo.from}</p>
+                                <Link to={`/Account/${transactionInfo.from}`} className="text-gray-400 hover:text-blue-500 p-3 bg-[#1a3559] rounded-md">{transactionInfo.from}</Link>
                             </div>
                             
-                            <div>
+                            <div className="flex flex-col gap-2">
                                 <h1 className="text-xl font-semibold">Transaction To: </h1>
-                                <p className="text-gray-400 p-3 bg-[#1a3559] rounded-md mt-2">{transactionInfo.to}</p>
+                                <Link to={`/Account/${transactionInfo.to}`} className="text-gray-400 hover:text-blue-500 p-3 bg-[#1a3559] rounded-md mt-2">{transactionInfo.to}</Link>
                             </div>
 
                             <div>
