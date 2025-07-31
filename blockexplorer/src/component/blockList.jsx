@@ -3,7 +3,7 @@ import alchemy from "../lib/alchemy";
 import ShortHash from "../lib/shortenHash";
 import blockIcon from "../assets/block.png"
 import BlockInfo from "./blockInfo";
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom"
 
 export default function BlockList() {
     const [blocks, setBlocks] = useState(() => {
@@ -52,7 +52,7 @@ export default function BlockList() {
                             <img src={blockIcon} alt="" className="w-9 h-9 object-contain p-2 bg-blue-950 rounded-md"/>
                             <div>
                                 <p className="text-lg font-bold">Block <Link to={`/block/${block.number}`} className="text-blue-500">#{block.number}</Link></p>
-                                <p className="text-sm text-gray-400">Hash: {ShortHash(block.hash)}</p>
+                                <Link to={`/block/${block.number}`} className="text-sm text-gray-400">Hash: <span className="hover:text-blue-400">{ShortHash(block.hash)}</span></Link>
                             </div>
                         </div>
                     </li>

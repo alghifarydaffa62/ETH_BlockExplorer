@@ -22,6 +22,7 @@ export default function AccountInfo({address}) {
 
         fetchInfo()
     }, [address])
+    
     return(
         <div className="flex justify-center gap-10">
             <div className="flex gap-10 items-center bg-blue-950 p-6 rounded-lg">

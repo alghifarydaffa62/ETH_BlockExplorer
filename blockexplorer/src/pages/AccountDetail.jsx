@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import Header from "../component/Header";
 import AccountInfo from "../component/AccountInfo";
+import AccountTxInfo from "../component/AccountTxInfo";
 
 export default function AccountDetail() {
     const { address } = useParams()
@@ -15,6 +16,7 @@ export default function AccountDetail() {
             </div>
             
             <AccountInfo address={address}/>
+            <AccountTxInfo address={address}/>
         </div>
     )
 }
