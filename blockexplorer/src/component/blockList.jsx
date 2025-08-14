@@ -1,5 +1,3 @@
-import { useState, useEffect } from "react";
-import alchemy from "../lib/alchemy";
 import ShortHash from "../lib/shortenHash";
 import blockIcon from "../assets/block.png"
 import BlockInfo from "./blockInfo";
@@ -9,40 +7,6 @@ import { Link } from "react-router-dom"
 export default function BlockList() {
     const blocks = useBlockStore((s) => s.blocks);
     const latestBlockNumber = blocks[0]?.number ?? null;
-    // const [blocks, setBlocks] = useState(() => {
-    //     const savedBlocks = localStorage.getItem("recentBlocks");
-    //     return savedBlocks ? JSON.parse(savedBlocks) : [];
-    // });
-
-    // const [latestBlockNumber, setLatestBlockNumber] = useState(() => {
-    //     const savedBlocks = localStorage.getItem("recentBlocks");
-    //     if (savedBlocks) {
-    //         const parsed = JSON.parse(savedBlocks);
-    //         return parsed.length > 0 ? parsed[0].number : null;
-    //     }
-    //     return null;
-    // });
-
-    // useEffect(() => {
-    //     const interval = setInterval(async () => {
-    //     const currentBlock = await alchemy.core.getBlockNumber();
-
-    //     if (currentBlock !== latestBlockNumber) {
-    //         const newBlock = await alchemy.core.getBlock(currentBlock);
-
-    //         setBlocks(prev => {
-    //         const updated = [newBlock, ...prev].slice(0, 10);
-
-    //         localStorage.setItem("recentBlocks", JSON.stringify(updated));
-    //         return updated;
-    //         });
-
-    //         setLatestBlockNumber(currentBlock);
-    //     }
-    //     }, 2000);
-
-    //     return () => clearInterval(interval);
-    // }, [latestBlockNumber]);
 
     return(
         <div>

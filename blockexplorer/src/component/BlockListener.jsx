@@ -18,10 +18,8 @@ export default function BlockListener() {
       }
     };
 
-    // 1) Dengarkan blok baru
     wsProvider.on("block", handler);
 
-    // 2) Bootstrap: ambil 10 blok terakhir agar UI langsung ada data
     (async () => {
       try {
         const latest = await wsProvider.getBlockNumber();
@@ -37,7 +35,7 @@ export default function BlockListener() {
 
     return () => {
       cancelled = true;
-      wsProvider.off("block", handler); // penting: cleanup (apalagi di StrictMode)
+      wsProvider.off("block", handler); 
     };
   }, [addBlock, setBlocks]);
 
