@@ -4,15 +4,20 @@ import BlockDetail from './pages/blockDetail'
 import TransactionDetail from './pages/TransactionDetail'
 import AccountDetail from './pages/AccountDetail'
 import './App.css'
+import BlockListener from './component/BlockListener'
 
 function App() {
     return(
-      <Routes>
-        <Route path='/' element={<Home/>}/>
-        <Route path='/block/:number' element={<BlockDetail />}/>
-        <Route path='/transaction/:hash' element={<TransactionDetail />}/>
-        <Route path='/Account/:address' element={<AccountDetail/>}/>
-      </Routes>
+      <>
+        <BlockListener/>
+        <Routes>
+          <Route path='/' element={<Home/>}/>
+          <Route path='/block/:number' element={<BlockDetail />}/>
+          <Route path='/transaction/:hash' element={<TransactionDetail />}/>
+          <Route path='/Account/:address' element={<AccountDetail/>}/>
+        </Routes>
+      </>
+      
     )
 }
 
