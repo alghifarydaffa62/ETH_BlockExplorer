@@ -11,41 +11,45 @@ export default function BlockTransaction() {
 
     useEffect(() => {
         async function getinfo() {
-        const {block} = await BlockValidation(number)
-        setBlockInfo(block)
+            const { block } = await BlockValidation(number);
+            setBlockInfo(block);
         }
+        getinfo();
+    }, [number]);
 
-        getinfo()
-    }, [number])
-
-    return(
-        <div className="bg-[#0b1c3b] p-6 rounded-lg shadow-md shadow-white/10 h-[45rem] flex flex-col text-white">
+    return (
+        <div className="bg-[#0b1c3b] p-6 rounded-lg shadow-md shadow-white/10 h-[45rem] flex flex-col text-white w-full">
             <div className="mb-4">
                 <h1 className="font-bold text-xl">
-                Block <span className="text-blue-300">#{number}</span> transactions:
+                    Block <span className="text-blue-300">#{number}</span> transactions:
                 </h1>
             </div>
 
             {/* Scrollable transactions */}
             <div className="flex-1 overflow-y-auto pr-2">
                 {blockInfo ? (
-                <div className="flex flex-col gap-4">
-                    {blockInfo.transactions.slice(0, 15).map((txHash, index) => (
-                    <div
-                        key={index}
-                        className="bg-[#12263e] p-4 rounded-lg text-sm shadow shadow-black/10"
-                    >
-                        <p className="text-blue-200 text-lg font-bold mb-1">
-                        Transaction {index + 1}
-                        </p>
-                        <Link to={`/transaction/${txHash}`} className="text-gray-300 hover:text-blue-500">{ShortHash(txHash)}</Link>
+                    <div className="flex flex-col gap-4">
+                        {blockInfo.transactions.slice(0, 15).map((txHash, index) => (
+                            <div
+                                key={index}
+                                className="bg-[#12263e] p-4 rounded-lg text-sm shadow shadow-black/10"
+                            >
+                                <p className="text-blue-200 text-lg font-bold mb-1">
+                                    Transaction {index + 1}
+                                </p>
+                                <Link
+                                    to={`/transaction/${txHash}`}
+                                    className="text-gray-300 hover:text-blue-500"
+                                >
+                                    {ShortHash(txHash)}
+                                </Link>
+                            </div>
+                        ))}
                     </div>
-                    ))}
-                </div>
                 ) : (
-                <p className="text-center text-white">Loading block info...</p>
+                    <p className="text-center text-white">Loading block info...</p>
                 )}
             </div>
         </div>
-    )
+    );
 }

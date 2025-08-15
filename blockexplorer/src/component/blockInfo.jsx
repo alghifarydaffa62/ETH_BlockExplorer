@@ -53,7 +53,7 @@ export default function BlockInfo({ blockNumber }) {
               </p>
             </div>
   
-            <p className="font-semibold bg-[#1a3559] p-2 rounded-lg text-sm text-gray-300">{blockInfo.hash}</p>
+            <p className="font-semibold bg-[#1a3559] p-2 rounded-lg text-sm text-gray-300">{ShortHash(blockInfo.hash)}</p>
           </div>
 
           {/* Parent Hash */}
@@ -72,7 +72,7 @@ export default function BlockInfo({ blockNumber }) {
               <img src={miner} alt="" className="object-contain w-4 h-4"/>
               <p className="text-blue-200 font-bold text-md">Miner:</p>
             </div>
-            <p className="font-semibold bg-[#1a3559] p-2 rounded-lg text-sm text-gray-300">{blockInfo.miner}</p>
+            <p className="font-semibold bg-[#1a3559] p-2 rounded-lg text-sm text-gray-300">{ShortHash(blockInfo.miner)}</p>
           </div>
 
           {/* Timestamp */}

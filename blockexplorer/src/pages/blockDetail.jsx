@@ -9,24 +9,23 @@ export default function BlockDetail() {
 
   return (
     <div className="min-h-screen pb-2 text-white">
-      <Header/>
+      <Header />
 
-      <div className="mt-6">
+      <div className="mt-6 px-4">
         <h1 className="text-2xl md:text-4xl font-bold text-center">
           Block <span className="text-blue-400">#{number}</span>
         </h1>
 
-        <BackButton/>
+        <BackButton />
 
-        <div className="flex justify-center gap-6">
-          <div className="w-[38rem]">
+        <div className="flex flex-col lg:flex-row justify-center gap-6 mt-4">
+          <div className="w-full lg:w-[34rem]">
             <BlockInfo blockNumber={number} />
           </div>
-          <div className="w-2/5">
-            <BlockTransaction blockNumber={number}/>
+          <div className="w-full lg:w-2/5">
+            <BlockTransaction blockNumber={number} />
           </div>
         </div>
-
       </div>
     </div>
   );
