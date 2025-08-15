@@ -4,53 +4,65 @@ import ShortHash from "../lib/shortenHash"
 import { ethers } from "ethers"
 import { Link } from "react-router-dom"
 
-export default function TransactionBoxDetail({hash}) {
-    const [transactionInfo, setTransactionInfo] = useState()
+export default function TransactionBoxDetail({ hash }) {
+    const [transactionInfo, setTransactionInfo] = useState();
 
     useEffect(() => {
         async function fetchTransaction() {
-            const transaction = await alchemy.core.getTransaction(hash)
-            setTransactionInfo(transaction)
+            const transaction = await alchemy.core.getTransaction(hash);
+            setTransactionInfo(transaction);
         }
+        fetchTransaction();
+    }, [hash]);
 
-        fetchTransaction()
-    }, [hash])
-
-    return(
-        <div className="flex flex-col items-center">
+    return (
+        <div className="flex flex-col items-center px-4">
             {transactionInfo ? (
                 <>
-                    <div className="flex justify-center mb-10 mt-4">
+                    <div className="flex justify-center mb-10 mt-4 w-full">
                         <Link
                             to={`/block/${transactionInfo.blockNumber}`}
-                            className="inline-block bg-[#18385b] hover:bg-[#20527c] transition text-white font-semibold px-6 py-2 rounded-lg shadow-md"
-                            >
+                            className="inline-block bg-[#18385b] hover:bg-[#20527c] transition text-white font-semibold px-6 py-2 rounded-lg shadow-md text-center"
+                        >
                             ← Back to Block #{transactionInfo.blockNumber}
                         </Link>
                     </div>
 
-                    <div className="text-white bg-[#0b1c3b] p-6 flex gap-10 rounded-xl w-fit">
-                        <div className="flex flex-col gap-4">
+                    <div className="text-white bg-[#0b1c3b] p-6 flex flex-col lg:flex-row gap-6 lg:gap-10 rounded-xl w-full max-w-5xl">
+                        {/* Left side */}
+                        <div className="flex flex-col gap-4 flex-1">
                             <div>
                                 <h1 className="text-xl font-semibold">
-                                    Block Number: 
-                                    <span className="text-gray-400 "> #{transactionInfo.blockNumber}</span>
+                                    Block Number:
+                                    <span className="text-gray-400"> #{transactionInfo.blockNumber}</span>
                                 </h1>
                             </div>
 
                             <div>
                                 <h1 className="text-xl font-semibold">Transaction hash: </h1>
-                                <p className="text-gray-400 p-3 bg-[#1a3559] rounded-md mt-2">{ShortHash(transactionInfo.hash)}</p>
+                                <p className="text-gray-400 p-3 bg-[#1a3559] rounded-md mt-2 break-all">
+                                    {ShortHash(transactionInfo.hash)}
+                                </p>
                             </div>
-                            
+
                             <div className="flex flex-col gap-2">
                                 <h1 className="text-xl font-semibold">Transaction From: </h1>
-                                <Link to={`/Account/${transactionInfo.from}`} className="text-gray-400 hover:text-blue-500 p-3 bg-[#1a3559] rounded-md">{transactionInfo.from}</Link>
+                                <Link
+                                    to={`/Account/${transactionInfo.from}`}
+                                    className="text-gray-400 hover:text-blue-500 p-3 bg-[#1a3559] rounded-md break-all"
+                                >
+                                    {ShortHash(transactionInfo.from)}
+                                </Link>
                             </div>
-                            
+
                             <div className="flex flex-col gap-2">
                                 <h1 className="text-xl font-semibold">Transaction To: </h1>
-                                <Link to={`/Account/${transactionInfo.to}`} className="text-gray-400 hover:text-blue-500 p-3 bg-[#1a3559] rounded-md mt-2">{transactionInfo.to}</Link>
+                                <Link
+                                    to={`/Account/${transactionInfo.to}`}
+                                    className="text-gray-400 hover:text-blue-500 p-3 bg-[#1a3559] rounded-md mt-2 break-all"
+                                >
+                                    {ShortHash(transactionInfo.to)}
+                                </Link>
                             </div>
 
                             <div>
@@ -61,17 +73,18 @@ export default function TransactionBoxDetail({hash}) {
                             </div>
                         </div>
 
-                        <div className="flex flex-col gap-4">
+                        {/* Right side */}
+                        <div className="flex flex-col gap-4 flex-1">
                             <div>
                                 <h1 className="text-xl font-semibold">Gas Limit: </h1>
                                 <p className="text-gray-400 p-3 bg-[#1a3559] rounded-md mt-2">{transactionInfo.gasLimit.toString()}</p>
                             </div>
-                            
+
                             <div>
                                 <h1 className="text-xl font-semibold">Gas Price: </h1>
                                 <p className="text-gray-400 p-3 bg-[#1a3559] rounded-md mt-2">{transactionInfo.gasPrice.toString()}</p>
                             </div>
-                            
+
                             <div>
                                 <h1 className="text-xl font-semibold">Max Fee Per Gas: </h1>
                                 <p className="text-gray-400 p-3 bg-[#1a3559] rounded-md mt-2">{transactionInfo.maxFeePerGas.toString()}</p>
@@ -80,23 +93,21 @@ export default function TransactionBoxDetail({hash}) {
                             <div>
                                 <h1 className="text-xl font-semibold">
                                     Transaction Type:
-                                    <span className="text-gray-400"> 
-                                        {transactionInfo.type === 0 ? (
-                                            <> Legacy</>
-                                        ) : transactionInfo === 1 ? (
-                                            <> Access List</>
-                                        ) : (
-                                            <> Dynamic Fee</>
-                                        )}
+                                    <span className="text-gray-400">
+                                        {transactionInfo.type === 0
+                                            ? " Legacy"
+                                            : transactionInfo.type === 1
+                                            ? " Access List"
+                                            : " Dynamic Fee"}
                                     </span>
                                 </h1>
                             </div>
                         </div>
-                    </div>    
+                    </div>
                 </>
             ) : (
-                <h1>Loading transaction info...</h1>
+                <h1 className="text-white mt-6">Loading transaction info...</h1>
             )}
         </div>
-    )
+    );
 }
